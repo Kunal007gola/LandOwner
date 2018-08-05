@@ -4,6 +4,7 @@ package com.rme.landOwner;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,13 +27,25 @@ public class Discussion {
 	private String title;
 	@Column(name="Created_at")
 	private Date createdAt;
+	public Discussion() {
+		super();
+	}
 	@Column(name="Updated_at")
 	private Date updatedAt;
-	
+	private ArrayList<String> attachments;
+	public Discussion(long did, int like, int dislike, Date createdAt,
+			Date updatedAt) {
+		super();
+		this.did = did;
+		this.like = like;
+		this.dislike = dislike;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
+	}
 	@ManyToOne(cascade=CascadeType.ALL)
-	private HashSet<User> discUser;
+	private User discUser;
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="repDiscus")
-	private HashSet<Replies> disreplies;
+	private Set<Replies> disreplies=new HashSet<>();
 	
 	
 	public String getTitle() {
@@ -41,7 +54,6 @@ public class Discussion {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	ArrayList<String> attachments;
 	public int getLike() {
 		return like;
 	}
@@ -66,10 +78,10 @@ public class Discussion {
 	public void setAttachments(ArrayList<String> attachments) {
 		this.attachments = attachments;
 	}
-	public HashSet<User> getDiscUser() {
+	public User getDiscUser() {
 		return discUser;
 	}
-	public void setDiscUser(HashSet<User> discUser) {
+	public void setDiscUser(User discUser) {
 		this.discUser = discUser;
 	}
 	public long getDid() {
@@ -87,7 +99,7 @@ public class Discussion {
 	public Date getCreatedAt() {
 		return createdAt;
 	}
-	public HashSet<Replies> getDisreplies() {
+	public Set<Replies> getDisreplies() {
 		return disreplies;
 	}
 	public void setDisreplies(HashSet<Replies> disreplies) {

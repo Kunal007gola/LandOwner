@@ -3,6 +3,7 @@ package com.rme.landOwner;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -25,11 +26,18 @@ public class Replies {
 	private ArrayList<String> img;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
-	private HashSet<Discussion> repDiscus ;
+	private Discussion repDiscus ;
 	@OneToMany(cascade=CascadeType.ALL,mappedBy="commReplie")
-	private HashSet<Comments> repComments;
+	private Set<Comments> repComments;
 	
-	
+	public Replies(int rid, String uuid, String rBody, Date createdAt, ArrayList<String> img) {
+		super();
+		this.rid = rid;
+		this.uuid = uuid;
+		this.rBody = rBody;
+		this.createdAt = createdAt;
+		this.img = img;
+	}
 	public int getRid() {
 		return rid;
 	}
@@ -60,13 +68,13 @@ public class Replies {
 	public void setImg(ArrayList<String> img) {
 		this.img = img;
 	}
-	public HashSet<Discussion> getRepDiscus() {
+	public Discussion getRepDiscus() {
 		return repDiscus;
 	}
-	public void setRepDiscus(HashSet<Discussion> repDiscus) {
+	public void setRepDiscus(Discussion repDiscus) {
 		this.repDiscus = repDiscus;
 	}
-	public HashSet<Comments> getRepComments() {
+	public Set<Comments> getRepComments() {
 		return repComments;
 	}
 	public void setRepComments(HashSet<Comments> repComments) {

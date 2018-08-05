@@ -1,8 +1,10 @@
 package com.rme.landOwner;
 
 import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -11,15 +13,27 @@ import javax.persistence.OneToMany;
 public class User {
 	
 	@Id
+	@Column(nullable=false)
 	private long id;
+	@Column(nullable=false)
 	private String uuid;
 	private long profileView;
 	private short star;
 	
-	@OneToMany(cascade=CascadeType.ALL,mappedBy="discUser")
-	private HashSet<Discussion> userDiscussion;
+	@OneToMany(cascade=CascadeType.ALL)
+	private Set<Discussion> userDiscussion=new HashSet<>();
 	
-	public HashSet<Discussion> getUserDiscussion() {
+	public User() {
+		super();
+	}
+	public User(long id, String uuid, long profileView, short star) {
+		super();
+		this.id = id;
+		this.uuid = uuid;
+		this.profileView = profileView;
+		this.star = star;
+	}
+	public Set<Discussion> getUserDiscussion() {
 		return userDiscussion;
 	}
 	public void setUserDiscussion(HashSet<Discussion> userDiscussion) {

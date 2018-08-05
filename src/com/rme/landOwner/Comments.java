@@ -20,7 +20,16 @@ public class Comments {
 	private Date createdAt;
 	
 	@ManyToOne(cascade=CascadeType.ALL)
-	private HashSet<Replies> commReplie;
+	private Replies commReplie;
+
+	
+	public Comments(int cid, String uuid, String cBody, Date createdAt) {
+		super();
+		this.cid = cid;
+		this.uuid = uuid;
+		this.cBody = cBody;
+		this.createdAt = createdAt;
+	}
 
 	public int getCid() {
 		return cid;
@@ -54,11 +63,11 @@ public class Comments {
 		this.createdAt = createdAt;
 	}
 
-	public HashSet<Replies> getCommReplie() {
+	public Replies getCommReplie() {
 		return commReplie;
 	}
 
-	public void setCommReplie(HashSet<Replies> commReplie) {
+	public void setCommReplie(Replies commReplie) {
 		this.commReplie = commReplie;
 	}
 	
